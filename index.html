@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>爷的时钟</title>
+    <style>
+      .clock {
+        background: url(https://s2.loli.net/2022/10/21/13D9aSQvcxPjehd.jpg)
+          no-repeat center center;
+        height: 600px;
+        width: 600px;
+        position: relative;
+        margin: 0 auto;
+      }
+      .hours {
+        background-color: blue;
+        width: 6px;
+        height: 70px;
+
+        position: absolute;
+        left: 287px;
+        top: 230px;
+      }
+      .minute {
+        background-color: red;
+        width: 5px;
+        height: 100px;
+
+        position: absolute;
+        left: 288px;
+        top: 220px;
+      }
+      .seconds {
+        background-color: green;
+        width: 3px;
+        height: 120px;
+
+        position: absolute;
+        left: 289px;
+        top: 210px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock">
+      <div class="hours"></div>
+      <div class="minute"></div>
+      <div class="seconds"></div>
+    </div>
+    <script>
+      const run = () => {
+        const date = new Date();
+        const seconds = date.getSeconds();
+        const minute = date.getMinutes();
+        let hours = date.getHours();
+        if (hours >= 12) {
+          hours -= 12;
+        }
+        const hoursEl = document.querySelector(".hours");
+        const minuteEl = document.querySelector(".minute");
+        const secondsEl = document.querySelector(".seconds");
+        //让有hours元素标签的盒子变成渐变的
+        hoursEl.style.transform = `rotate(${
+          (hours + minute / 60) * 30
+        }deg) translateY(-35px)`;
+        minuteEl.style.transform = `rotate(${
+          (minute + seconds / 60) * 6
+        }deg) translateY(-35px)`;
+        secondsEl.style.transform = `rotate(${
+          seconds * 6
+        }deg) translateY(-60px)`;
+      };
+      run();
+      setInterval(() => {
+        run();
+      }, 1000);
+    </script>
+  </body>
+</html>
